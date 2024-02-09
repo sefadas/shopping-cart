@@ -1,10 +1,29 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Detail from "./pages/Detail";
+import Navbar from "./components/Navbar";
+import Containers from "./containers/Containers";
+import { useSelector } from "react-redux";
+import Card from "./components/Card";
 
 function App() {
+
+  const { drawer } = useSelector(state => state.drawers)
+
+  console.log(drawer, "draw")
+
   return (
-    <div className="App bg-gray-700 h-[100vh]">
-      <h1 className="text-3xl font-bold underline">
-        Hello world!
-      </h1>
+    <div className="App">
+      <Containers>
+        <BrowserRouter>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="Detail/:id" element={<Detail />} />
+          </Routes>
+          {drawer && <Card />}
+        </BrowserRouter>
+      </Containers>
     </div>
   );
 }
