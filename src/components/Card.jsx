@@ -16,6 +16,11 @@ const Card = () => {
           size={25}
         />
       </div>
+
+      <div className="h-32 flex flex-col items-center">
+        <img src="" alt="" />
+        <div>men's clothing</div>
+      </div>
     </div>
   );
 };
