@@ -5,10 +5,11 @@ import axios from "axios";
 const cardItems = JSON.parse(localStorage.getItem('cardItems')) || []
 const initialState = {
     cardValue: cardItems,
-    total: 0
+    total: 0,
+    qty: 0
 }
 
-export const getCard = createAsyncThunk('getCard', async ({ id, quantity }, { dispatch, getState }) => {
+export const getCard = createAsyncThunk('getCard', async (id, { dispatch, getState }) => {
     const { data } = await axios.get(`https://fakestoreapi.com/products/${id}`)
 
     const payload = {
@@ -17,12 +18,12 @@ export const getCard = createAsyncThunk('getCard', async ({ id, quantity }, { di
         title: data.title,
         description: data.description,
         price: data.price,
-        qty: quantity
+
     };
 
     dispatch(addObject(payload));
 
-    const { cardValue } = getState().card;
+    const { cardValue } = getState().cards;
 
     localStorage.setItem('cardItems', JSON.stringify([...cardValue, payload]))
 
@@ -36,7 +37,7 @@ export const cardSlice = createSlice({
     initialState,
     reducers: {
         addObject: (state, action) => {
-            const findCard = state.cardValue.cardItems.find(item => item.id === action.payload.id)
+            const findCard = state.cardValue.find(item => item.id === action.payload.id)
 
             if (findCard) {
                 findCard.qty++
@@ -44,6 +45,8 @@ export const cardSlice = createSlice({
                 state.cardValue.push(action.payload)
             }
             state.total += action.payload.price
+            state.qty++;
+            // state.qty += parseInt(action.payload.qty,10)
         },
 
         removeObject: (state, action) => {
@@ -53,9 +56,11 @@ export const cardSlice = createSlice({
                 if (itemRemove.qty > 1) {
                     itemRemove.qty--;
                     state.total -= itemRemove.price
+                    state.qty--;
                 } else {
                     state.cardValue = state.cardValue.filter(item => item.id !== action.payload)
                     state.total -= itemRemove.price
+                    state.qty--;
                 }
             }
         },

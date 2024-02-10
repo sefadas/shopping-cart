@@ -12,15 +12,13 @@ const Detail = () => {
 
   const details = useSelector((state) => state.details.detailValue);
 
-  const [counter, setCounter] = useState(0);
+  const [counter, setCounter] = useState(1);
 
   const cards = useSelector((state) => state.cards.cardValue);
 
   useEffect(() => {
     dispatch(getDetail(id));
   }, [dispatch, id]);
-
-  console.log(details, "details");
 
   const decrement = () => {
     if (counter > 0) {
@@ -35,8 +33,8 @@ const Detail = () => {
     }
   };
 
-  const addToCard = (id) => {
-    dispatch(getCard(id, counter));
+  const addToCard = () => {
+    dispatch(addObject(details, { qty: counter }));
   };
 
   return (
@@ -68,7 +66,7 @@ const Detail = () => {
           />
         </div>
         <div
-          onClick={() => addToCard(details.id)}
+          onClick={() => addToCard()}
           className="w-full bg-blue-500 cursor-pointer hover:bg-blue-700 text-lg font-bold py-4 border border-blue-700 rounded-md duration-700 text-center"
         >
           Add to Basket

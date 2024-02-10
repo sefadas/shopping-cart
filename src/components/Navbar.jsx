@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { MdOutlineDarkMode, MdDarkMode } from "react-icons/md";
 import { SlBasket } from "react-icons/sl";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { openCard } from "../redux/reducers/drawerSlice";
 
 const Navbar = () => {
   const [color, setColor] = useState(true);
 
   const dispatch = useDispatch();
+
+  const cards = useSelector((state) => state.cards.cardValue);
 
   useEffect(() => {
     const root = document.getElementById("root");
@@ -46,8 +48,8 @@ const Navbar = () => {
               size={25}
               className="cursor-pointer"
             />
-            <span className="absolute -top-3 -right-3 px-1 w-5 h-5 text-center bg-red-600 rounded-full text-sm">
-              3
+            <span className="absolute -top-3 -right-3 px-1 w-5 h-5 text-center bg-red-600 rounded-full text-sm text-white">
+              {cards?.lengt}
             </span>
           </div>
         </div>
