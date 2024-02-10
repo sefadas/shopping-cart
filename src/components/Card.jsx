@@ -7,8 +7,8 @@ const Card = () => {
   const dispatch = useDispatch();
 
   return (
-    <div className="w-[40%] h-full border fixed top-0 right-0 z-30 bg-gray-400 p-3">
-      <div className="flex items-center justify-between h-20">
+    <div className="lg:w-[35%] md:w-[40%] sm:[50%] max-sm:w-[60%] h-full border fixed top-0 right-0 z-30 bg-sky-950 p-3 overflow-scroll pt-20">
+      <div className="flex items-center justify-between h-24 px-3 pt-3">
         <h1>MY CART:</h1>
         <MdClose
           onClick={() => dispatch(openCard())}

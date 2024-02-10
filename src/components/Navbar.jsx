@@ -21,33 +21,35 @@ const Navbar = () => {
     }
   }, [color]);
   return (
-    <div className="flex items-center justify-between px-3 h-24">
-      <div className="text-3xl tracking-widest font-bold">
-        <a href="/">SHOPPING</a>
-      </div>
-      <div className="flex items-center gap-4">
-        <input
-          type="text"
-          placeholder="search"
-          className="border p-2 outline-none rounded-lg bg-transparent"
-        />
-        <div onClick={() => setColor(!color)}>
-          {color ? (
-            <MdOutlineDarkMode size={25} className="cursor-pointer" />
-          ) : (
-            <MdDarkMode size={25} className="cursor-pointer" />
-          )}
+    <div className="w-full bg-gray-500 fixed z-50">
+      <div className="flex items-center justify-between h-24 px-4 container mx-auto">
+        <div className="sm:text-3xl md:text-5xl lg:text-6xl max-sm:text-3xl tracking-widest font-bold bg-gradient-to-r from-red-500 via-gray-600 to-red-600 inline-block text-transparent bg-clip-text">
+          <a href="/">SHOPPING</a>
         </div>
-
-        <div className="relative">
-          <SlBasket
-            onClick={() => dispatch(openCard())}
-            size={25}
-            className="cursor-pointer"
+        <div className="flex items-center gap-4">
+          <input
+            type="text"
+            placeholder="search"
+            className="border p-2 outline-none rounded-lg bg-transparent"
           />
-          <span className="absolute -top-3 -right-3 px-1 bg-red-600 text-white rounded-full text-sm">
-            3
-          </span>
+          <div onClick={() => setColor(!color)}>
+            {color ? (
+              <MdOutlineDarkMode size={25} className="cursor-pointer" />
+            ) : (
+              <MdDarkMode size={25} className="cursor-pointer" />
+            )}
+          </div>
+
+          <div className="relative">
+            <SlBasket
+              onClick={() => dispatch(openCard())}
+              size={25}
+              className="cursor-pointer"
+            />
+            <span className="absolute -top-3 -right-3 px-1 w-5 h-5 text-center bg-red-600 rounded-full text-sm">
+              3
+            </span>
+          </div>
         </div>
       </div>
     </div>

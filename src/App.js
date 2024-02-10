@@ -14,9 +14,10 @@ function App() {
 
   return (
     <div className="App">
+      <Navbar />
       <Containers>
         <BrowserRouter>
-          <Navbar />
+
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="Detail/:id" element={<Detail />} />
