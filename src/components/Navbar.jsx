@@ -49,7 +49,7 @@ const Navbar = () => {
               className="cursor-pointer"
             />
             <span className="absolute -top-3 -right-3 px-1 w-5 h-5 text-center bg-red-600 rounded-full text-sm text-white">
-              {cards?.lengt}
+              {cards?.length}
             </span>
           </div>
         </div>

@@ -34,7 +34,7 @@ const Detail = () => {
   };
 
   const addToCard = () => {
-    dispatch(addObject(details, { qty: counter }));
+    dispatch(addObject(details, cards?.qty));
   };
 
   return (

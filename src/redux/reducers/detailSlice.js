@@ -17,6 +17,7 @@ export const detailSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(getDetail.fulfilled, (state, action) => {
+
             state.detailValue = action.payload
         })
     }

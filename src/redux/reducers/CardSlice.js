@@ -23,7 +23,7 @@ export const getCard = createAsyncThunk('getCard', async (id, { dispatch, getSta
 
     dispatch(addObject(payload));
 
-    const { cardValue } = getState().cards;
+    const { cardValue } = getState().card;
 
     localStorage.setItem('cardItems', JSON.stringify([...cardValue, payload]))
 
@@ -33,24 +33,26 @@ export const getCard = createAsyncThunk('getCard', async (id, { dispatch, getSta
 })
 
 export const cardSlice = createSlice({
-    name: "details",
+    name: "cardValue",
     initialState,
     reducers: {
         addObject: (state, action) => {
-            const findCard = state.cardValue.find(item => item.id === action.payload.id)
+            const findCard = state.cardValue.find((item) => item.id === action.payload.id)
 
             if (findCard) {
                 findCard.qty++
             } else {
-                state.cardValue.push(action.payload)
+                state.cardValue.push({ ...action.payload, qty: 1 })
             }
+
             state.total += action.payload.price
             state.qty++;
-            // state.qty += parseInt(action.payload.qty,10)
+
+            localStorage.setItem('cardItems', JSON.stringify(state.cardValue));
         },
 
         removeObject: (state, action) => {
-            const itemRemove = state.cardValue.find(item => item.id === action.payload)
+            const itemRemove = state.cardValue.find((item) => item.id === action.payload)
 
             if (itemRemove) {
                 if (itemRemove.qty > 1) {
@@ -58,10 +60,11 @@ export const cardSlice = createSlice({
                     state.total -= itemRemove.price
                     state.qty--;
                 } else {
-                    state.cardValue = state.cardValue.filter(item => item.id !== action.payload)
+                    state.cardValue = state.cardValue.filter((item) => item.id !== action.payload)
                     state.total -= itemRemove.price
                     state.qty--;
                 }
+                localStorage.setItem('cardItems', JSON.stringify(state.cardValue));
             }
         },
 
