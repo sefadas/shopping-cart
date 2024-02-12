@@ -34,13 +34,18 @@ const Detail = () => {
   };
 
   const addToCard = () => {
-    dispatch(addObject(details, cards?.qty));
+    dispatch(
+      addObject({
+        ...details,
+        qty: counter,
+      })
+    );
   };
 
   return (
     <div className="flex md:flex-row sm:flex-col max-sm:flex-col justify-center w-full pt-48 pb-16 gap-4">
       <img
-        className="lg:w-1/3 md:w-1/3 sm:w-full max-sm:pb-12 sm:pb-12 md:pb-0"
+        className="lg:w-1/3 md:w-1/3 sm:w-full max-sm:pb-12 sm:pb-12 md:pb-0 rounded-lg"
         src={details?.image}
         alt=""
       />

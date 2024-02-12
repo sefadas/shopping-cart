@@ -8,13 +8,6 @@ const Card = () => {
   const dispatch = useDispatch();
 
   const cards = useSelector((state) => state.cards.cardValue);
-  const qty = useSelector((state) => state.cards.qty);
-
-  console.log(cards, "cards");
-
-  const delObject = (id) => {
-    dispatch(removeObject(id));
-  };
 
   return (
     <div className="lg:w-[35%] md:w-[40%] sm:[50%] max-sm:w-[60%] h-full border fixed top-0 right-0 z-30 bg-sky-950 p-3 overflow-scroll pt-20">
@@ -38,7 +31,7 @@ const Card = () => {
             </div>
             <div className="flex">
               <button
-                onClick={() => delObject(crd.id)}
+                onClick={() => dispatch(removeObject(crd?.id))}
                 className="w-20 h-8 bg-red-500 hover:bg-red-700 rounded-lg whitespace-nowrap duration-700"
               >
                 DELETE

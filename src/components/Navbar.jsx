@@ -3,6 +3,8 @@ import { MdOutlineDarkMode, MdDarkMode } from "react-icons/md";
 import { SlBasket } from "react-icons/sl";
 import { useDispatch, useSelector } from "react-redux";
 import { openCard } from "../redux/reducers/drawerSlice";
+import debounce from "lodash.debounce";
+import { filterSearch } from "../redux/reducers/productSlice";
 
 const Navbar = () => {
   const [color, setColor] = useState(true);
@@ -22,6 +24,11 @@ const Navbar = () => {
       root.style.color = "black";
     }
   }, [color]);
+
+  const handleInputChange = debounce((value) => {
+    dispatch(filterSearch(value));
+  }, 1000);
+
   return (
     <div className="w-full bg-gray-500 fixed z-50">
       <div className="flex items-center justify-between h-24 px-4 container mx-auto">
@@ -30,6 +37,7 @@ const Navbar = () => {
         </div>
         <div className="flex items-center gap-4">
           <input
+            onChange={(e) => handleInputChange(e.target.value)}
             type="text"
             placeholder="search"
             className="border p-2 outline-none rounded-lg bg-transparent"
