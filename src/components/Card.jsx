@@ -12,6 +12,10 @@ const Card = () => {
 
   console.log(cards, "cards");
 
+  const delObject = (id) => {
+    dispatch(removeObject(id));
+  };
+
   return (
     <div className="lg:w-[35%] md:w-[40%] sm:[50%] max-sm:w-[60%] h-full border fixed top-0 right-0 z-30 bg-sky-950 p-3 overflow-scroll pt-20">
       <div className="flex items-center justify-between h-24 px-3 pt-3">
@@ -30,11 +34,11 @@ const Card = () => {
             <div className="opacity-70">{crd?.title?.substring(0, 27)}...</div>
             <div className="font-bold">{crd?.category}</div>
             <div className="font-bold text-nowrap">
-              PRICE : {crd?.price?.toFixed(2)} $ ({qty} piece)
+              PRICE : {crd?.price?.toFixed(2)} $ ({crd?.qty} piece)
             </div>
             <div className="flex">
               <button
-                onClick={() => dispatch(removeObject(crd.id))}
+                onClick={() => delObject(crd.id)}
                 className="w-20 h-8 bg-red-500 hover:bg-red-700 rounded-lg whitespace-nowrap duration-700"
               >
                 DELETE

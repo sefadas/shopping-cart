@@ -39,29 +39,33 @@ export const cardSlice = createSlice({
         addObject: (state, action) => {
             const findCard = state.cardValue.find((item) => item.id === action.payload.id)
 
-            if (findCard) {
-                findCard.qty++
-            } else {
-                state.cardValue.push({ ...action.payload, qty: 1 })
-            }
+            if (findCard) findCard.qty += action.payload.qty
+            else state.cardValue.push({ ...action.payload })
 
             state.total += action.payload.price
-            state.qty++;
+
+            state.qty = state.cardValue.length
 
             localStorage.setItem('cardItems', JSON.stringify(state.cardValue));
         },
 
         removeObject: (state, action) => {
+
             const itemRemove = state.cardValue.find((item) => item.id === action.payload)
 
             if (itemRemove) {
                 if (itemRemove.qty > 1) {
+
                     itemRemove.qty--;
+
                     state.total -= itemRemove.price
+
                     state.qty--;
                 } else {
                     state.cardValue = state.cardValue.filter((item) => item.id !== action.payload)
+
                     state.total -= itemRemove.price
+
                     state.qty--;
                 }
                 localStorage.setItem('cardItems', JSON.stringify(state.cardValue));

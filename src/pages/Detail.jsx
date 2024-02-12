@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getDetail } from "../redux/reducers/detailSlice";
 import { CgMathMinus, CgMathPlus } from "react-icons/cg";
-import { addObject, getCard } from "../redux/reducers/CardSlice";
+import { addObject } from "../redux/reducers/CardSlice";
 
 const Detail = () => {
   const { id } = useParams();
