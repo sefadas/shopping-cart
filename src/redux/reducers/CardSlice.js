@@ -9,6 +9,11 @@ const initialState = {
     qty: 0
 }
 
+export const totalPrice = (newTotal) => ({
+    type: 'cardValue/totalPrice',
+    payload: newTotal
+})
+
 export const getCard = createAsyncThunk('getCard', async (id, { dispatch, getState }) => {
     const { data } = await axios.get(`https://fakestoreapi.com/products/${id}`)
 
@@ -83,10 +88,5 @@ export const cardSlice = createSlice({
 })
 
 export const { addObject, removeObject } = cardSlice.actions
-
-export const totalPrice = (newTotal) => ({
-    type: 'cardValue/totalPrice',
-    payload: newTotal
-})
 
 export default cardSlice.reducer

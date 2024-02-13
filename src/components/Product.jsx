@@ -30,6 +30,7 @@ const Product = ({ prd }) => {
         src={prd?.image}
         alt=""
       />
+
       <div className="font-bold">{prd?.category}</div>
       <div className="h-12">{(prd?.title).substring(0, 27)}...</div>
       <div className="opacity-70 h-10">
