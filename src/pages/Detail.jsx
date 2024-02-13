@@ -14,8 +14,6 @@ const Detail = () => {
 
   const [counter, setCounter] = useState(1);
 
-  const cards = useSelector((state) => state.cards.cardValue);
-
   useEffect(() => {
     dispatch(getDetail(id));
   }, [dispatch, id]);

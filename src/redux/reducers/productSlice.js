@@ -2,8 +2,8 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
+    searchData: [],
     productValue: [],
-    searchData: []
 }
 
 export const getProducts = createAsyncThunk('getProducts', async () => {
@@ -18,7 +18,7 @@ export const productSlice = createSlice({
         filterSearch: (state, action) => {
             const search = action.payload.toLowerCase()
 
-            state.products = state.searchData.filter(
+            state.productValue = state.searchData.filter(
                 (prd) => prd.category.toLowerCase().includes(search)
                     ||
                     prd.title.toLowerCase().includes(search.toLowerCase())
@@ -30,6 +30,7 @@ export const productSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(getProducts.fulfilled, (state, action) => {
             state.productValue = action.payload
+            state.searchData = action.payload
         })
     }
 })
