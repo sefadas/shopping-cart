@@ -42,7 +42,7 @@ export const cardSlice = createSlice({
             if (findCard) findCard.qty += action.payload.qty
             else state.cardValue.push({ ...action.payload })
 
-            state.total += action.payload.price
+            state.total += action.payload.price * action.payload.qty
 
             state.qty = state.cardValue.length
 
@@ -72,6 +72,8 @@ export const cardSlice = createSlice({
             }
         },
 
+
+
     },
     extraReducers: (builder) => {
         builder.addCase(getCard.fulfilled, (state, action) => {
@@ -81,4 +83,10 @@ export const cardSlice = createSlice({
 })
 
 export const { addObject, removeObject } = cardSlice.actions
+
+export const totalPrice = (newTotal) => ({
+    type: 'cardValue/totalPrice',
+    payload: newTotal
+})
+
 export default cardSlice.reducer
