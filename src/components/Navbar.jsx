@@ -20,7 +20,7 @@ const Navbar = () => {
       root.style.backgroundColor = "black";
       root.style.color = "white";
     } else {
-      root.style.backgroundColor = "gray";
+      root.style.backgroundColor = "white";
       root.style.color = "black";
     }
   }, [color]);
