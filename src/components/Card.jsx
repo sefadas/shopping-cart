@@ -18,6 +18,9 @@ const Card = () => {
     <div className="lg:w-[35%] md:w-[40%] sm:[50%] max-sm:w-[60%] h-full border fixed top-0 right-0 z-30 bg-sky-950 p-3 overflow-scroll pt-20">
       <div className="flex items-center justify-between h-24 px-3 pt-3">
         <h1>TOTAL : {totals.toFixed(2)} </h1>
+        <button className="bg-green-500 rounded-lg px-3 py-2 hover:bg-green-700 duration-700">
+          Complete Shopping
+        </button>
         <MdClose
           onClick={() => dispatch(openCard())}
           className="cursor-pointer"
