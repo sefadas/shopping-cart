@@ -7,6 +7,8 @@ import debounce from "lodash.debounce";
 import { filterSearch } from "../redux/reducers/productSlice";
 import i18n from "../i18n";
 import { useTranslation } from "react-i18next";
+import tr from "../utils/images/tr.png";
+import en from "../utils/images/en.png";
 
 const Navbar = () => {
   const { t } = useTranslation();
@@ -14,6 +16,13 @@ const Navbar = () => {
   const changeLanguage = async (lang) => {
     await i18n.changeLanguage(lang);
   };
+
+  const flagChange = (lang) => {
+    changeLanguage(lang);
+    setFlag(!flag);
+  };
+
+  const [flag, setFlag] = useState(true);
 
   const [color, setColor] = useState(true);
 
@@ -69,16 +78,17 @@ const Navbar = () => {
           </div>
           <select
             className="bg-transparent text-lg "
-            onChange={(e) => changeLanguage(e.target.value)}
+            onChange={(e) => flagChange(e.target.value)}
           >
             <option className="text-black" value="en">
-              English
+              {t("EN")}
             </option>
 
             <option className="text-black" value="tr">
-              Türkçe
+              {t("TR")}
             </option>
           </select>
+          <img className="w-8" src={flag ? en : tr} alt="" />
         </div>
       </div>
     </div>
