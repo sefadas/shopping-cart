@@ -1,8 +1,11 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { addObject, totalPrice } from "../redux/reducers/CardSlice";
+import { useTranslation } from "react-i18next";
 
 const Product = ({ prd }) => {
+  const { t } = useTranslation();
+
   const dispatch = useDispatch();
 
   const addToHome = () => {
@@ -39,14 +42,16 @@ const Product = ({ prd }) => {
         <div className="opacity-70 h-10">
           {(prd?.description).substring(0, 24)}...
         </div>
-        <div className="font-bold text-lg">{prd?.price} $</div>
+        <div className="font-bold text-lg">
+          {prd?.price} {t("money")}
+        </div>
       </div>
 
       <button
         onClick={addToHome}
         className="font-bold w-full h-12 bg-blue-600 hover:bg-blue-700 duration-500 rounded-lg"
       >
-        Add to Basket
+        {t("buy")}
       </button>
     </div>
   );

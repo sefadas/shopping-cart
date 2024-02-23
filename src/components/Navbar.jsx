@@ -5,8 +5,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { openCard } from "../redux/reducers/drawerSlice";
 import debounce from "lodash.debounce";
 import { filterSearch } from "../redux/reducers/productSlice";
+import i18n from "../i18n";
+import { useTranslation } from "react-i18next";
 
 const Navbar = () => {
+  const { t } = useTranslation();
+
+  const changeLanguage = async (lang) => {
+    await i18n.changeLanguage(lang);
+  };
+
   const [color, setColor] = useState(true);
 
   const dispatch = useDispatch();
@@ -33,13 +41,13 @@ const Navbar = () => {
     <div className="w-full bg-gray-500 fixed z-50">
       <div className="flex items-center justify-between h-24 px-4 container mx-auto">
         <div className="sm:text-3xl md:text-5xl lg:text-6xl max-sm:text-3xl tracking-widest font-bold bg-gradient-to-r from-red-500 via-gray-600 to-red-600 inline-block text-transparent bg-clip-text">
-          <a href="/">SHOPPING</a>
+          <a href="/">{t("logo")}</a>
         </div>
         <div className="flex items-center gap-4">
           <input
             onChange={(e) => handleInputChange(e.target.value)}
             type="text"
-            placeholder="search"
+            placeholder={t("search")}
             className="border p-2 outline-none rounded-lg bg-transparent"
           />
           <div onClick={() => setColor(!color)}>
@@ -49,7 +57,6 @@ const Navbar = () => {
               <MdDarkMode size={25} className="cursor-pointer" />
             )}
           </div>
-
           <div className="relative">
             <SlBasket
               onClick={() => dispatch(openCard())}
@@ -60,6 +67,18 @@ const Navbar = () => {
               {cards?.length}
             </span>
           </div>
+          <select
+            className="bg-transparent text-lg "
+            onChange={(e) => changeLanguage(e.target.value)}
+          >
+            <option className="text-black" value="en">
+              English
+            </option>
+
+            <option className="text-black" value="tr">
+              Türkçe
+            </option>
+          </select>
         </div>
       </div>
     </div>

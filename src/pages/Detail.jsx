@@ -4,8 +4,11 @@ import { useParams } from "react-router-dom";
 import { getDetail } from "../redux/reducers/detailSlice";
 import { CgMathMinus, CgMathPlus } from "react-icons/cg";
 import { addObject } from "../redux/reducers/CardSlice";
+import { useTranslation } from "react-i18next";
 
 const Detail = () => {
+  const { t } = useTranslation();
+
   const { id } = useParams();
 
   const dispatch = useDispatch();
@@ -52,9 +55,12 @@ const Detail = () => {
         <div className="text-xl">{details?.title}</div>
         <div className="opacity-60">{details?.description}</div>
         <div className="font-bold">
-          Rate: {details?.rating?.rate} - Stock: {details?.rating?.count}
+          {t("rate")} {details?.rating?.rate} - {t("stock")}{" "}
+          {details?.rating?.count}
         </div>
-        <div className="font-bold text-xl">Price: {details?.price}</div>
+        <div className="font-bold text-xl">
+          {t("prc")} {details?.price}
+        </div>
         <div className="flex items-center gap-8 pb-3 pt-3">
           <CgMathMinus
             onClick={decrement}
@@ -72,7 +78,7 @@ const Detail = () => {
           onClick={() => addToCard()}
           className="w-full bg-blue-500 cursor-pointer hover:bg-blue-700 text-lg font-bold py-4 border border-blue-700 rounded-md duration-700 text-center"
         >
-          Add to Basket
+          {t("buy")}
         </div>
       </div>
     </div>
