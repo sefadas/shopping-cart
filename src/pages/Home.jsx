@@ -12,8 +12,6 @@ const Home = () => {
     dispatch(getProducts());
   }, [dispatch]);
 
-  console.log(products, "products");
-
   return (
     <div className="flex flex-wrap justify-center gap-4 pt-44 pb-24">
       {products && products.map((prd, i) => <Product key={i} prd={prd} />)}

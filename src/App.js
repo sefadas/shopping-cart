@@ -10,8 +10,6 @@ function App() {
 
   const { drawer } = useSelector(state => state.drawers)
 
-  console.log(drawer, "draw")
-
   return (
     <div className="App">
       <Navbar />
